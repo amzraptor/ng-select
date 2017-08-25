@@ -114,13 +114,17 @@ ng-select {
                     color: #FFF;
 
                 }
-                
+
                 >div.option.disabled {
                     color: darkgrey;
                     background-color: #E2E2E3;
 
                     span.deselect-option {
-                        color: #000;
+                        color: #444;
+                    }
+
+                    &:hover {
+                        color: #555;
                     }
                 }
 

@@ -47,6 +47,7 @@ select-dropdown {
 
     .selected {
         background-color: #e0e0e0;
+          color: #a9a9a9;
 
         &.highlighted {
             background-color: #2196F3;
@@ -61,7 +62,6 @@ select-dropdown {
 
     .disabled {
         background-color: #e2e2e3;
-        color: #a9a9a9;
         cursor: default;
     }
 }
