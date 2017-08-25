@@ -55,13 +55,13 @@ select-dropdown {
         }
     }
 
-    .highlighted {
-        background-color: #2196F3;
-        color: #fff;
-    }
-
     .disabled {
         background-color: #e2e2e3;
         cursor: default;
+    }
+
+    .highlighted {
+        background-color: #2196F3;
+        color: #fff;
     }
 }
