@@ -4,6 +4,7 @@
 
 A select component for angular, based on the [select2] JQuery plugin. See the
 [ng-select] web site for documentation and examples, or try it with this [plunker].
+Forked to provide selecting of disabled options in a select box.
 
 ## Develop
 
