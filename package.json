@@ -1,6 +1,6 @@
 {
   "name": "ng-select-vu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Select component for angular.",
   "main": "index.js",
   "repository": "git@github.com:alanmbarr/ng-select.git",
