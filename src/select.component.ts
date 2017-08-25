@@ -35,6 +35,7 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit 
     // Style settings.
     @Input() highlightColor: string;
     @Input() highlightTextColor: string;
+    @Input() classOptions: string = 'option';
 
     // Text settings.
     @Input() notFoundMsg: string = 'No results found';
@@ -285,7 +286,7 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit 
     /** Select. **/
 
     private selectOption(option: Option) {
-        if (!option.selected && !option.disabled) {
+        if (!option.selected) {
             this.optionList.select(option, this.multiple);
             this.valueChanged();
             this.selected.emit(option.wrappedOption);

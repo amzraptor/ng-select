@@ -31,7 +31,7 @@ ng-select {
         }
 
         &.disabled {
-            background-color: #eee;
+            background-color: #000;
             color: #aaa;
             cursor: default;
             pointer-events: none;
@@ -98,7 +98,7 @@ ng-select {
                 padding: 0 4px;
 
                 span.deselect-option {
-                    color: #aaa;
+                    color: #FFF;
                     cursor: pointer;
                     font-size: 14px;
                     height: 20px;
@@ -109,6 +109,21 @@ ng-select {
                     }
                 }
             }
+                >div.option.active {
+                    background-color: #7394AB;
+                    color: #FFF;
+
+                }
+                
+                >div.option.disabled {
+                    color: darkgrey;
+                    background-color: #E2E2E3;
+
+                    span.deselect-option {
+                        color: #000;
+                    }
+                }
+
 
             input {
                 background-color: transparent;
@@ -131,5 +146,15 @@ ng-select {
         display: block;
         font-size: 13px;
         padding: 4px 0;
+    }
+
+    >div.multiple > div.option.disabled {
+      color: darkgrey;
+      background-color: #E2E2E3;
+    }
+
+    >div.multiple > div.option.active {
+      background-color: #7394AB;
+      color: #FFF;
     }
 }
