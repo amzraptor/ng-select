@@ -39,7 +39,7 @@
     <div class="multiple"
         *ngIf="multiple">
         <div class="option"
-            *ngFor="let option of optionList.selection;" [ngClass]="(option.disabled == true) ? 'disabled': 'active'"  >
+            *ngFor="let option of optionList.selection;" [ngClass]="(option.disabled == true) ? 'disabled': 'active'" >
             <span class="deselect-option"
                 (click)=onDeselectOptionClick(option)>
                 &#x2715;

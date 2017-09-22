@@ -5,7 +5,7 @@ import {Diacritics} from './diacritics';
 export class OptionList {
 
     private _options: Array<Option>;
-
+    private _selectedOptions: Array<Option>;
     /* Consider using these for performance improvement. */
     // private _selection: Array<Option>;
     // private _filtered: Array<Option>;
@@ -36,6 +36,14 @@ export class OptionList {
             return o;
         });
 
+        this._selectedOptions = [];
+
+        this._options.forEach(option => {
+            if (option.selected) {
+                this._selectedOptions.push(option);
+            }
+        });
+
         this._hasShown = this._options.length > 0;
         this.highlight();
     }
@@ -52,6 +60,12 @@ export class OptionList {
         });
     }
 
+    /** Selected Options. **/
+
+    get selectedOptions(): Array<Option> {
+        return this._selectedOptions;
+    }
+
     /** Value. **/
 
     get value(): Array<string> {
@@ -63,6 +77,9 @@ export class OptionList {
 
         this.options.forEach((option) => {
             option.selected = v.indexOf(option.value) > -1;
+            if (option.selected) {
+                this._selectedOptions.push(option);
+            }
         });
         this.updateHasSelected();
     }
@@ -70,7 +87,7 @@ export class OptionList {
     /** Selection. **/
 
     get selection(): Array<Option> {
-        return this.options.filter(option => option.selected);
+        return this._selectedOptions;
     }
 
     select(option: Option, multiple: boolean) {
@@ -78,17 +95,28 @@ export class OptionList {
             this.clearSelection();
         }
         option.selected = true;
+        this._selectedOptions.push(option);
         this.updateHasSelected();
     }
 
     deselect(option: Option) {
         option.selected = false;
+        var index = this.selectedOptions.indexOf(option, 0);
+        if (index > -1) {
+            this.selectedOptions.splice(index, 1);
+        }
+
         this.updateHasSelected();
     }
 
     clearSelection() {
         this.options.forEach((option) => {
             option.selected = false;
+
+            var index = this.selectedOptions.indexOf(option, 0);
+            if (index > -1) {
+                this.selectedOptions.splice(index, 1);
+            }
         });
         this._hasSelected = false;
     }
