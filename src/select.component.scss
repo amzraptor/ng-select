@@ -83,7 +83,10 @@ ng-select {
             min-height: 30px;
             padding: 0 10px;
             width: 100%;
-
+            >div.placeholderdrop{
+                padding: 0 10px 0 10px;
+                background-color: greenyellow;
+            }
             >div.option {
                 background-color: #eee;
                 border: 1px solid #aaa;

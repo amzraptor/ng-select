@@ -121,6 +121,26 @@ export class OptionList {
         this._hasSelected = false;
     }
 
+    reorderSelected(v: Array<string>) {
+        let sortedOptions: Array<Option>;
+        var orginalList = this._selectedOptions;
+        sortedOptions = [];
+
+        v.forEach(function(key) {
+            var found = false;
+            orginalList = orginalList.filter(function(item) {
+                if (!found && item.wrappedOption.value === key) {
+                    sortedOptions.push(item);
+                    found = true;
+                    return false;
+                } else
+                    return true;
+            });
+        });
+
+        this._selectedOptions = sortedOptions;
+    }
+
     private updateHasSelected() {
         this._hasSelected = this.options.some(option => option.selected);
     }
