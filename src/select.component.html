@@ -37,9 +37,9 @@
     </div>
 
     <div class="multiple"
-        *ngIf="multiple">
-        <div class="option"
-            *ngFor="let option of optionList.selection;" [ngClass]="(option.disabled == true) ? 'disabled': 'active'"  >
+        *ngIf="multiple" (dragover)="onDragOverEvent($event)" (drop)="onDropEvent($event)">
+        <div class="option" draggable="true" (dragstart)="onDragStartEvent($event)"
+            *ngFor="let option of optionList.selection;" [ngClass]="(option.disabled == true) ? 'disabled': 'active'" #elem [attr.id]="option.value">
             <span class="deselect-option"
                 (click)=onDeselectOptionClick(option)>
                 &#x2715;

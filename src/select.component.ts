@@ -167,6 +167,60 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit 
         this.handleSingleFilterKeydown(event);
     }
 
+    onDragOverEvent(event: any) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+    }
+
+    onDropEvent(event: any) {
+        event.preventDefault();
+        var data = event.dataTransfer.getData('text');
+        var success = false;
+        if (event.target.classList.contains('multiple')) {
+            //being the parent div only
+            event.target.appendChild(document.getElementById(data));
+            success = true;
+        }
+        else if (event.target.classList.contains('option')) {
+            var i = 0;
+            var child = event.target;
+            while ((child = child.previousSibling) !== null ) {
+              i++;
+            }
+            event.target.parentNode.insertBefore(document.getElementById(data), event.target.parentNode.childNodes[i]);
+            success = true;
+        }
+        else if (event.target.classList.contains('deselect-option')) {
+            var j = 0;
+            var child1 = event.target.parentNode;
+            while ((child1 = child1.previousSibling) !== null ) {
+              j++;
+            }
+            event.target.parentNode.parentNode.insertBefore(document.getElementById(data), event.target.parentNode.parentNode.childNodes[j]);
+            success = true;
+        }
+        if (success) {
+            this.reorderSelectedDataStructure();
+            this.valueChanged();
+        }
+    }
+
+    reorderSelectedDataStructure() {
+        let elements: NodeListOf<Element> = document.getElementsByClassName('multiple')[0].getElementsByClassName('option');
+        var stringList: string[] = [];
+
+        [].forEach.call(elements, function (item) {
+            stringList.push(item.id);
+          });
+
+        this.optionList.reorderSelected(stringList);
+    }
+
+    onDragStartEvent(event: any) {
+        event.dataTransfer.setData('text/plain', event.target.id);
+        event.dataTransfer.dropEffect = 'move';
+    }
+
     onMultipleFilterKeydown(event: any) {
         this.handleMultipleFilterKeydown(event);
     }
