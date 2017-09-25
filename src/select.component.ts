@@ -176,37 +176,41 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit 
         event.preventDefault();
         var data = event.dataTransfer.getData('text');
         var success = false;
-        if (event.target.classList.contains('multiple')) {
+        var targetDiv = null;
+        if (event.target.classList.contains('multiple') && (event.srcElement === event.target)) {
             //being the parent div only
             event.target.appendChild(document.getElementById(data));
+            targetDiv = event.target;
             success = true;
         }
-        else if (event.target.classList.contains('option')) {
+        else if (event.target.classList.contains('option') && (event.srcElement.parentNode === event.target.parentNode)) {
             var i = 0;
             var child = event.target;
             while ((child = child.previousSibling) !== null ) {
               i++;
             }
             event.target.parentNode.insertBefore(document.getElementById(data), event.target.parentNode.childNodes[i]);
+            targetDiv = event.target.parentNode;
             success = true;
         }
-        else if (event.target.classList.contains('deselect-option')) {
+        else if (event.target.classList.contains('deselect-option') && (event.srcElement.parentNode.parentNode === event.target.parentNode.parentNode)) {
             var j = 0;
             var child1 = event.target.parentNode;
             while ((child1 = child1.previousSibling) !== null ) {
               j++;
             }
             event.target.parentNode.parentNode.insertBefore(document.getElementById(data), event.target.parentNode.parentNode.childNodes[j]);
+            targetDiv = event.target.parentNode.parentNode;
             success = true;
         }
         if (success) {
-            this.reorderSelectedDataStructure();
+            this.reorderSelectedDataStructure(targetDiv);
             this.valueChanged();
         }
     }
 
-    reorderSelectedDataStructure() {
-        let elements: NodeListOf<Element> = document.getElementsByClassName('multiple')[0].getElementsByClassName('option');
+    reorderSelectedDataStructure(targetDiv) {
+        let elements: NodeListOf<Element> = targetDiv.getElementsByClassName('option');
         var stringList: string[] = [];
 
         [].forEach.call(elements, function (item) {
