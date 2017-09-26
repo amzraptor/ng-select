@@ -175,31 +175,32 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit 
     onDropEvent(event: any) {
         event.preventDefault();
         var data = event.dataTransfer.getData('text');
+        var elementToMove = document.getElementById(data);
         var success = false;
         var targetDiv = null;
-        if (event.target.classList.contains('multiple') && (event.srcElement === event.target)) {
+        if (event.target.classList.contains('multiple') && (elementToMove.getAttribute('name') === event.target.getAttribute('name'))) {
             //being the parent div only
-            event.target.appendChild(document.getElementById(data));
+            event.target.appendChild(elementToMove);
             targetDiv = event.target;
             success = true;
         }
-        else if (event.target.classList.contains('option') && (event.srcElement.parentNode === event.target.parentNode)) {
+        else if (event.target.classList.contains('option') && (elementToMove.getAttribute('name') === event.target.parentNode.getAttribute('name'))) {
             var i = 0;
             var child = event.target;
             while ((child = child.previousSibling) !== null ) {
               i++;
             }
-            event.target.parentNode.insertBefore(document.getElementById(data), event.target.parentNode.childNodes[i]);
+            event.target.parentNode.insertBefore(elementToMove, event.target.parentNode.childNodes[i]);
             targetDiv = event.target.parentNode;
             success = true;
         }
-        else if (event.target.classList.contains('deselect-option') && (event.srcElement.parentNode.parentNode === event.target.parentNode.parentNode)) {
+        else if (event.target.classList.contains('deselect-option') && (elementToMove.getAttribute('name')  === event.target.parentNode.parentNode.getAttribute('name'))) {
             var j = 0;
             var child1 = event.target.parentNode;
             while ((child1 = child1.previousSibling) !== null ) {
               j++;
             }
-            event.target.parentNode.parentNode.insertBefore(document.getElementById(data), event.target.parentNode.parentNode.childNodes[j]);
+            event.target.parentNode.parentNode.insertBefore(elementToMove, event.target.parentNode.parentNode.childNodes[j]);
             targetDiv = event.target.parentNode.parentNode;
             success = true;
         }

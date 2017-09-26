@@ -36,10 +36,10 @@
         </div>
     </div>
 
-    <div class="multiple"
+    <div class="multiple" #elem [attr.name]="optionList.Guid"
         *ngIf="multiple" (dragover)="onDragOverEvent($event)" (drop)="onDropEvent($event)">
         <div class="option" draggable="true" (dragstart)="onDragStartEvent($event)"
-            *ngFor="let option of optionList.selection;" [ngClass]="(option.disabled == true) ? 'disabled': 'active'" #elem [attr.id]="option.value">
+            *ngFor="let option of optionList.selection;" [ngClass]="(option.disabled == true) ? 'disabled': 'active'" #elem [attr.id]="option.value" #elem [attr.name]="optionList.Guid">
             <span class="deselect-option"
                 (click)=onDeselectOptionClick(option)>
                 &#x2715;

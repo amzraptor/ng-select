@@ -15,11 +15,17 @@ export class OptionList {
     private _hasShown: boolean;
     private _hasSelected: boolean;
 
+    private _guid: string = OptionList.newGuid();
+
     get hasShown(): boolean {
         return this._hasShown;
     }
     get hasSelected(): boolean {
         return this._hasSelected;
+    }
+
+    get Guid(): string {
+        return this._guid;
     }
 
     constructor(options: Array<IOption>) {
@@ -284,6 +290,13 @@ export class OptionList {
 
         return a.every((v, i) => {
             return v === b[i];
+        });
+    }
+
+    static newGuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
         });
     }
 }
