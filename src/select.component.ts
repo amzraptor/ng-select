@@ -222,7 +222,7 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit 
     }
 
     onDragStartEvent(event: any) {
-        event.dataTransfer.setData('text/plain', event.target.id);
+        event.dataTransfer.setData('text', event.target.id);
         event.dataTransfer.dropEffect = 'move';
     }
 
